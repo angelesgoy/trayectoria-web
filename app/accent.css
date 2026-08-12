@@ -1,0 +1,26 @@
+:root { --accent: #ff4a1a; }
+
+.contact-pill { background: var(--accent); color: #080808; font-weight: 700; }
+.featured { background: #0b0b0b; color: #f2f2ef; }
+.featured-copy > span { color: var(--accent); }
+.featured-lines i { border-color: var(--accent); }
+.featured-lines b { color: var(--accent); }
+
+.lime .card-visual,
+.blue .card-visual,
+.stone .card-visual,
+.coral .card-visual,
+.lilac .card-visual,
+.sand .card-visual,
+.green .card-visual,
+.ice .card-visual,
+.yellow .card-visual { background: #111; }
+
+.work-card:nth-child(even) .card-visual { background: #242424; }
+.work-card:nth-child(3n) .card-visual { background: #d8d8d2; }
+.site-copy small { color: var(--accent); font-weight: 700; }
+.site-copy em { color: var(--accent); border-color: var(--accent); }
+.site-shape { border-top: 5px solid var(--accent); }
+.card-meta span { color: var(--accent); font-weight: 700; }
+.process { background: var(--accent); color: #080808; }
+.closing a { color: var(--accent); border-color: var(--accent); font-weight: 700; }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Chivo } from "next/font/google";
 import "./globals.css";
+import "./accent.css";
 
 const chivo = Chivo({ variable: "--font-chivo", subsets: ["latin"] });
 
