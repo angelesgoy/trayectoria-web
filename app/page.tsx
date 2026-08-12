@@ -1,124 +1,56 @@
 const projects = [
-  {
-    type: "Bienestar",
-    name: "Estudio de Pilates",
-    description: "Clases, horarios y una forma simple de hacer una consulta.",
-    tone: "warm",
-  },
-  {
-    type: "Servicios profesionales",
-    name: "Abogada independiente",
-    description: "Áreas de práctica, trayectoria y canales de contacto claros.",
-    tone: "cool",
-  },
-  {
-    type: "Estudio jurídico",
-    name: "Práctica legal",
-    description: "Una presentación sobria para generar confianza desde la primera búsqueda.",
-    tone: "neutral",
-  },
+  ["01", "Estudio de Pilates", "Bienestar", "lime"],
+  ["02", "Abogada independiente", "Derecho", "blue"],
+  ["03", "Estudio jurídico", "Servicios profesionales", "stone"],
+  ["04", "Arquitecta", "Arquitectura", "coral"],
+  ["05", "Consultorio de psicología", "Salud", "lilac"],
+  ["06", "Estudio contable", "Finanzas", "sand"],
+  ["07", "Nutricionista", "Salud y bienestar", "green"],
+  ["08", "Odontología", "Salud", "ice"],
+  ["09", "Consultora", "Estrategia", "yellow"],
 ];
 
+function MiniSite({ name, index }: { name: string; index: string }) {
+  return <div className="site-frame"><div className="site-top"><span>{name}</span><span>MENÚ</span></div><div className="site-copy"><small>PROYECTO {index}</small><b>{name}</b><i /><i /><em>CONOCER MÁS →</em></div><div className="site-shape" /></div>;
+}
+
 export default function Home() {
-  return (
-    <main>
-      <header className="nav shell">
-        <a className="wordmark" href="#inicio" aria-label="Trayectoria, inicio">TRAYECTORIA</a>
-        <nav aria-label="Navegación principal">
-          <a href="#por-que">Por qué una web</a>
-          <a href="#trabajos">Trabajos</a>
-          <a href="#proceso">Cómo trabajo</a>
-        </nav>
-        <a className="button button-small" href="#contacto">Hablemos</a>
-      </header>
+  return <main>
+    <header className="topbar">
+      <nav><a href="#trabajos">Proyectos</a><a href="#estudio">Estudio</a><a href="#servicios">Servicios</a></nav>
+      <div className="top-note">Presencia digital para profesionales</div>
+      <nav className="social"><a href="#">Instagram</a><a href="#">LinkedIn</a><a className="contact-pill" href="#contacto">Contactar ↗</a></nav>
+    </header>
 
-      <section className="hero shell" id="inicio">
-        <p className="eyebrow">Presencia digital para profesionales</p>
-        <h1>Hacemos visible<br /><em>lo que construiste.</em></h1>
-        <p className="hero-copy">
-          Diseñamos el lugar digital donde tu experiencia, tu trabajo y tu manera
-          de hacer las cosas encuentran una presencia a la altura.
-        </p>
-        <div className="hero-actions">
-          <a className="button" href="#contacto">Construyamos tu presencia</a>
-          <a className="text-link" href="#trabajos">Ver proyectos <span>↓</span></a>
-        </div>
-        <div className="browser" aria-label="Representación de una página profesional">
-          <div className="browser-bar"><i /><i /><i /><span>tusitio.com</span></div>
-          <div className="browser-body">
-            <div className="browser-copy"><b>Tu actividad, explicada con claridad.</b><span /><span /><span className="short" /><button>Contacto</button></div>
-            <div className="browser-visual"><div>Tu imagen<br />o tu trabajo</div></div>
-          </div>
-        </div>
-      </section>
+    <section className="masthead" id="inicio"><h1>TRAYECTORIA</h1></section>
 
-      <section className="problem" id="por-que">
-        <div className="shell split">
-          <div>
-            <p className="eyebrow">El punto de partida</p>
-            <h2>Tu cliente ya te está buscando.</h2>
-          </div>
-          <div className="large-copy">
-            <p>Antes de escribirte, las personas buscan tu nombre, revisan tu actividad y comparan opciones.</p>
-            <p>Una web reúne la información correcta en un lugar propio y la presenta de una forma que genera seguridad.</p>
-          </div>
-        </div>
-        <div className="shell feature-grid">
-          <article><span>01</span><h3>Explicá qué hacés</h3><p>Servicios, experiencia y especialidades sin depender de publicaciones sueltas.</p></article>
-          <article><span>02</span><h3>Generá confianza</h3><p>Una presencia cuidada ayuda a que alguien dé el paso de contactarte.</p></article>
-          <article><span>03</span><h3>Hacete encontrable</h3><p>Información ordenada para personas, buscadores y asistentes digitales.</p></article>
-        </div>
-      </section>
+    <section className="featured" aria-label="Proyecto destacado: Estudio de Pilates">
+      <div className="featured-copy"><span>01 / PROYECTO EN DESARROLLO</span><h2>Estudio<br />de Pilates</h2><p>Movimiento, bienestar y comunidad en una presencia digital clara.</p></div>
+      <div className="featured-lines"><i /><i /><i /><b>PILATES</b></div>
+      <div className="featured-meta"><span>Bienestar</span><span>Sitio web · 2026</span></div>
+    </section>
 
-      <section className="projects shell" id="trabajos">
-        <div className="section-heading">
-          <div><p className="eyebrow">Proyectos</p><h2>Webs que estoy construyendo.</h2></div>
-          <p>Estos primeros proyectos van a mostrar cómo adapto cada sitio a una actividad distinta.</p>
-        </div>
-        <div className="project-grid">
-          {projects.map((project, index) => (
-            <article className={`project-card ${project.tone}`} key={project.name}>
-              <div className="project-preview">
-                <span className="mini-label">PROYECTO 0{index + 1}</span>
-                <div className="mini-window"><i /><i /><b>{project.name}</b><span /><span /><em /></div>
-              </div>
-              <div className="project-info">
-                <p>{project.type}</p><h3>{project.name}</h3><span>{project.description}</span>
-                <small>EN DESARROLLO</small>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+    <section className="work" id="trabajos">
+      <div className="work-head"><p>Proyectos y exploraciones</p><p>Nueve maneras de presentar una trayectoria.<br /><span>Conceptos en desarrollo.</span></p></div>
+      <div className="work-grid">
+        {projects.map(([index,name,type,tone]) => <article className={`work-card ${tone}`} key={index}>
+          <div className="card-visual"><MiniSite name={name} index={index} /></div>
+          <div className="card-meta"><h3>{name}</h3><p>{type}</p><span>{index}</span></div>
+        </article>)}
+      </div>
+    </section>
 
-      <section className="process" id="proceso">
-        <div className="shell">
-          <div className="section-heading"><div><p className="eyebrow">El proceso</p><h2>Simple de principio a fin.</h2></div><p>No necesitás saber de diseño ni preparar todo por tu cuenta. Lo ordenamos juntos.</p></div>
-          <ol>
-            <li><span>1</span><div><h3>Conversamos</h3><p>Me contás sobre tu actividad, tus clientes y lo que necesitás comunicar.</p></div></li>
-            <li><span>2</span><div><h3>Armo la propuesta</h3><p>Organizo la información y preparo una primera versión para que puedas verla.</p></div></li>
-            <li><span>3</span><div><h3>Revisamos</h3><p>Ajustamos textos, imágenes y detalles hasta que te represente.</p></div></li>
-            <li><span>4</span><div><h3>La publicamos</h3><p>Tu sitio queda listo para compartir, encontrar y recibir consultas.</p></div></li>
-          </ol>
-        </div>
-      </section>
+    <section className="manifesto" id="estudio"><p>TRAYECTORIA / ESTUDIO DIGITAL</p><h2>Tu trabajo habla de vos.<br />Tu presencia también.</h2><div><p>Diseñamos el lugar digital donde una persona puede presentar quién es, qué hace, qué experiencia tiene y cómo contactarla.</p><p>Una fuente propia, clara y confiable para personas, buscadores y nuevas herramientas digitales.</p></div></section>
 
-      <section className="about shell">
-        <p className="eyebrow">Trayectoria</p>
-        <div className="split"><h2>Una presencia digital clara, sin complicaciones.</h2><div className="large-copy"><p>Trabajo con profesionales y negocios que necesitan una web sencilla, cuidada y fácil de mantener.</p><p>La tecnología y la inteligencia artificial aceleran el proceso. Mi trabajo es convertirlas en una solución que tenga sentido para vos.</p></div></div>
-      </section>
+    <section className="services" id="servicios"><div className="service-title"><span>Lo que hacemos</span><h2>Presencias digitales<br />a la altura de tu trabajo.</h2></div><div className="service-list">
+      <article><span>01</span><h3>Dirección y diseño</h3><p>Ordenamos tu recorrido y construimos una identidad digital precisa.</p></article>
+      <article><span>02</span><h3>Contenido y estructura</h3><p>Presentamos servicios, experiencia y proyectos con claridad.</p></article>
+      <article><span>03</span><h3>Desarrollo y publicación</h3><p>Un sitio rápido, adaptable y listo para ser encontrado.</p></article>
+    </div></section>
 
-      <section className="contact" id="contacto">
-        <div className="shell contact-inner">
-          <p className="eyebrow">¿Tenés una actividad para mostrar?</p>
-          <h2>Podemos darle un lugar propio.</h2>
-          <p>Contame brevemente a qué te dedicás y vemos si una web puede ayudarte.</p>
-          <a className="button button-light" href="mailto:hola@tusitio.com">Escribime para conversar</a>
-          <small>Sin compromiso · Respuesta personal</small>
-        </div>
-      </section>
+    <section className="process"><p>EL PROCESO</p><ol><li><span>01</span>Conversamos</li><li><span>02</span>Diseñamos</li><li><span>03</span>Revisamos</li><li><span>04</span>Publicamos</li></ol></section>
 
-      <footer className="shell"><span>TRAYECTORIA — Presencia digital</span><span>Argentina · 2026</span></footer>
-    </main>
-  );
+    <section className="closing" id="contacto"><p>¿Tu presencia representa<br />lo que construiste?</p><a href="mailto:hola@tusitio.com">Hablemos ↗</a></section>
+    <footer><b>TRAYECTORIA</b><span>Buenos Aires · Argentina</span><span>© 2026</span></footer>
+  </main>;
 }
