@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main>
       <header className="nav shell">
-        <a className="wordmark" href="#inicio" aria-label="Inicio">Tu nombre</a>
+        <a className="wordmark" href="#inicio" aria-label="Trayectoria, inicio">TRAYECTORIA</a>
         <nav aria-label="Navegación principal">
           <a href="#por-que">Por qué una web</a>
           <a href="#trabajos">Trabajos</a>
@@ -33,14 +33,14 @@ export default function Home() {
       </header>
 
       <section className="hero shell" id="inicio">
-        <p className="eyebrow">Sitios web para profesionales y comercios</p>
-        <h1>Cuando te busquen,<br />que encuentren confianza.</h1>
+        <p className="eyebrow">Presencia digital para profesionales</p>
+        <h1>Hacemos visible<br /><em>lo que construiste.</em></h1>
         <p className="hero-copy">
-          Creo sitios claros y profesionales para que tus futuros clientes entiendan
-          quién sos, qué hacés y cómo contactarte.
+          Diseñamos el lugar digital donde tu experiencia, tu trabajo y tu manera
+          de hacer las cosas encuentran una presencia a la altura.
         </p>
         <div className="hero-actions">
-          <a className="button" href="#contacto">Quiero conversar</a>
+          <a className="button" href="#contacto">Construyamos tu presencia</a>
           <a className="text-link" href="#trabajos">Ver proyectos <span>↓</span></a>
         </div>
         <div className="browser" aria-label="Representación de una página profesional">
@@ -104,7 +104,7 @@ export default function Home() {
       </section>
 
       <section className="about shell">
-        <p className="eyebrow">Sobre el servicio</p>
+        <p className="eyebrow">Trayectoria</p>
         <div className="split"><h2>Una presencia digital clara, sin complicaciones.</h2><div className="large-copy"><p>Trabajo con profesionales y negocios que necesitan una web sencilla, cuidada y fácil de mantener.</p><p>La tecnología y la inteligencia artificial aceleran el proceso. Mi trabajo es convertirlas en una solución que tenga sentido para vos.</p></div></div>
       </section>
 
@@ -118,7 +118,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="shell"><span>Tu nombre — Diseño web</span><span>Argentina · 2026</span></footer>
+      <footer className="shell"><span>TRAYECTORIA — Presencia digital</span><span>Argentina · 2026</span></footer>
     </main>
   );
 }
