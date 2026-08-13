@@ -28,26 +28,20 @@ export default function Home() {
     </section>
 
     <section className="work" id="trabajos">
-      <div className="work-head"><div><p><span>§</span> PROYECTOS</p><h2>Hacemos visible lo que construiste.</h2></div></div>
+      <div className="work-head"><div><p>PROYECTOS</p><h2>Hacemos visible lo que construiste.</h2></div></div>
       <div className="work-grid">
         {projects.map(([index,name,type,image,position], order) => <article className="work-card reveal" style={{"--delay": `${(order % 3) * 100}ms`} as React.CSSProperties} key={index}>
           <div className={`card-visual ${position}`}><img src={image} alt="" /><span className="image-index">№ {index}</span><span className="image-arrow">↗</span></div>
           <div className="card-meta"><h3>{name}</h3><p>{type}</p><span>Ver →</span></div>
         </article>)}
       </div>
-      <a className="more-work" href="#mas-proyectos">Ver más proyectos ↓</a>
+      <a className="more-work" href="#estudio">Conocé el estudio ↓</a>
       <p className="work-disclaimer">↳ Proyectos reales y exploraciones conceptuales en desarrollo.</p>
     </section>
 
-    <section className="photo-story" id="mas-proyectos" aria-label="Exploración visual de The Wellness Club">
-      <div className="photo-story-head reveal"><span>THE WELLNESS CLUB — EN PROCESO</span><p>Una identidad se construye<br />con imágenes, ritmo y detalle.</p></div>
-      <figure className="story-large reveal"><img src="/wellness-team-01.webp" alt="Equipo de The Wellness Club" /></figure>
-      <div className="story-pair"><figure className="reveal"><img src="/wellness-pilates-02.webp" alt="Práctica de Pilates" /></figure><figure className="reveal"><img src="/wellness-team-04.webp" alt="Equipo en el estudio" /></figure></div>
-    </section>
+    <section className="manifesto" id="estudio"><p>POR QUÉ TRAYECTORIA</p><h2 className="reveal">Tu trayectoria merece<br />una presencia digital<br />a la altura.</h2><div className="manifesto-body reveal"><p>Una persona estudia, se forma, se especializa, ejerce y construye una reputación. Diseñamos el lugar digital capaz de representar ese recorrido con claridad, criterio y una identidad propia.</p></div></section>
 
-    <section className="manifesto" id="estudio"><p>§ POR QUÉ TRAYECTORIA</p><h2 className="reveal">Tu trayectoria merece<br />una presencia digital<br />a la altura.</h2><div className="manifesto-body reveal"><p>Una persona estudia, se forma, se especializa, ejerce y construye una reputación. Diseñamos el lugar digital capaz de representar ese recorrido con claridad, criterio y una identidad propia.</p></div></section>
-
-    <section className="services" id="servicios"><div className="service-title"><span>§ QUÉ HACEMOS</span><h2 className="reveal">Diseño humano.<br />Tecnología invisible.<br />Presencia propia.</h2><figure className="service-photo reveal"><img src="/wellness-team-03.webp" alt="Trabajo y comunidad en The Wellness Club" /></figure></div><div className="service-list">
+    <section className="services" id="servicios"><div className="service-title"><span>QUÉ HACEMOS</span><h2 className="reveal">Diseño humano.<br />Tecnología invisible.<br />Presencia propia.</h2><figure className="service-photo reveal"><img src="/wellness-team-03.webp" alt="Trabajo y comunidad en The Wellness Club" /></figure></div><div className="service-list">
       <article className="reveal"><span>№ 01</span><h3>Dirección y diseño</h3><p>Transformamos tu recorrido en una identidad digital precisa y contemporánea.</p></article>
       <article className="reveal"><span>№ 02</span><h3>Contenido y estructura</h3><p>Ordenamos servicios, experiencia, proyectos e información para que se comprendan con facilidad.</p></article>
       <article className="reveal"><span>№ 03</span><h3>Desarrollo y publicación</h3><p>Construimos un sitio rápido, adaptable y preparado para personas, buscadores y nuevas herramientas digitales.</p></article>
