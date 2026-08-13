@@ -22,6 +22,6 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.motion-ready .reveal{opacity:1!important;transform:none!important}}
 
 /* Ajustes de escala y composición */
-.masthead{padding:.65vw 0 1vw}.masthead h1{font-size:clamp(64px,14.25vw,280px);letter-spacing:-.06em;transform:scaleX(1.035);transform-origin:center}
+.masthead{padding:.25vw 0 .45vw}.masthead h1{font-size:clamp(74px,15.65vw,330px);font-weight:900;letter-spacing:-.092em;line-height:.79;transform:scaleX(1.075);transform-origin:center}
 .manifesto .manifesto-body{margin:42px 0 0;max-width:780px}
-@media(max-width:800px){.masthead{padding:2.8vw 0}.masthead h1{font-size:17.8vw;letter-spacing:-.075em;transform:scaleX(1.02)}.manifesto .manifesto-body{margin:34px 0 0}}
+@media(max-width:800px){.masthead{padding:1.6vw 0 2.1vw}.masthead h1{font-size:18.9vw;letter-spacing:-.105em;line-height:.8;transform:scaleX(1.06)}.manifesto .manifesto-body{margin:34px 0 0}}
