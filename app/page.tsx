@@ -15,7 +15,7 @@ export default function Home() {
     <header className="topbar">
       <nav aria-label="Navegación principal"><a href="#trabajos">Proyectos</a><a href="#estudio">Estudio</a><a href="#servicios">Servicios</a></nav>
       <div className="top-note">Presencia digital para profesionales</div>
-      <nav className="social" aria-label="Redes y contacto"><a href="#">Instagram ↗</a><a href="#">LinkedIn ↗</a><a className="contact-pill" href="#contacto">Contactar ↗</a></nav>
+      <nav className="social" aria-label="Contacto"><a className="contact-pill" href="#contacto">Contactar ↗</a></nav>
     </header>
 
     <section className="masthead" id="inicio"><h1>TRAYECTORIA</h1></section>
@@ -28,7 +28,7 @@ export default function Home() {
     </section>
 
     <section className="work" id="trabajos">
-      <div className="work-head"><p>§ PROYECTOS</p><p>Hacemos visible<br />lo que construiste.</p></div>
+      <div className="work-head"><div><p><span>§</span> PROYECTOS</p><h2>Hacemos visible lo que construiste.</h2></div></div>
       <div className="work-grid">
         {projects.map(([index,name,type,position]) => <article className="work-card" key={index}>
           <div className={`card-visual ${position}`}><img src="/pilates-studio.webp" alt="" /><span className="image-index">№ {index}</span><span className="image-arrow">↗</span></div>
@@ -38,9 +38,7 @@ export default function Home() {
       <p className="work-disclaimer">↳ Proyectos reales y exploraciones conceptuales en desarrollo.</p>
     </section>
 
-    <section className="manifesto" id="estudio"><p>§ TRAYECTORIA — ESTUDIO DIGITAL</p><h2>Tu trayectoria merece<br />una presencia digital<br />a la altura.</h2><div><p>Una persona estudia, se forma, se especializa, ejerce y construye una reputación. Todo ese recorrido constituye su trayectoria profesional.</p><p>Diseñamos el lugar digital donde ese recorrido puede presentarse con claridad, criterio y una identidad propia.</p></div></section>
-
-    <section className="statement"><span>№ 01</span><p>Tu web es una fuente propia y confiable sobre quién sos, qué hacés y cómo encontrarte.</p><span>Información clara → confianza</span></section>
+    <section className="manifesto" id="estudio"><p>§ POR QUÉ TRAYECTORIA</p><h2>Tu trayectoria merece<br />una presencia digital<br />a la altura.</h2><div className="manifesto-body"><p>Una persona estudia, se forma, se especializa, ejerce y construye una reputación. Diseñamos el lugar digital capaz de representar ese recorrido con claridad, criterio y una identidad propia.</p></div><div className="concept-chain">INFORMACIÓN CLARA <span>→</span> PRESENCIA PROPIA <span>→</span> CONFIANZA</div></section>
 
     <section className="services" id="servicios"><div className="service-title"><span>§ QUÉ HACEMOS</span><h2>Diseño humano.<br />Tecnología invisible.<br />Presencia propia.</h2></div><div className="service-list">
       <article><span>№ 01</span><h3>Dirección y diseño</h3><p>Transformamos tu recorrido en una identidad digital precisa y contemporánea.</p></article>
