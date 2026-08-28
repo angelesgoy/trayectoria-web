@@ -1,5 +1,5 @@
 /**
- * TRAYECTORIA v2026.10 - Projects Slider & MacOS In-Frame Browser Modal
+ * TRAYECTORIA v2026.11 - Projects Slider & MacOS In-Frame Browser Modal
  */
 
 (function () {

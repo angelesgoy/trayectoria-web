@@ -1,5 +1,6 @@
 /**
- * TRAYECTORIA v2026.10 — Canvas Engine
+ * TRAYECTORIA v2026.11 — Canvas Engine
+ * Drag & Drop táctil completo (Mobile Touch) + Desktop HTML5 Drag + Click-to-Snap
  */
 
 (function () {
@@ -25,8 +26,8 @@
 
     // ── Elementos del DOM
     const nameInput   = document.getElementById('pureCanvasNameInput');
-    const titleInput  = document.getElementById('pureCanvasTitleInput');   // contenteditable div
-    const phraseInput = document.getElementById('pureCanvasPhraseInput');  // contenteditable div
+    const titleInput  = document.getElementById('pureCanvasTitleInput');
+    const phraseInput = document.getElementById('pureCanvasPhraseInput');
 
     const dropGreen = document.getElementById('dropzoneGreenPill');
     const dropRed   = document.getElementById('dropzoneRedPhoto');
@@ -36,24 +37,17 @@
     const tokenPhoto = document.getElementById('tokenPhotoRed');
     const tokenMaps  = document.getElementById('tokenMapsBlue');
 
-    const mobileTokenWa    = document.getElementById('mobileTokenWa');
-    const mobileTokenPhoto = document.getElementById('mobileTokenPhoto');
-    const mobileTokenMaps  = document.getElementById('mobileTokenMaps');
-
     const launchBtn = document.getElementById('btnLaunchPureCanvasWA');
 
     // ──────────────────────────────────────────────
     // 1. ESCRITURA DIRECTA SOBRE EL LIENZO
     // ──────────────────────────────────────────────
-
-    // Input de nombre (sigue siendo <input>)
     nameInput?.addEventListener('input', () => {
       pureState.name = nameInput.value.trim() || 'Tu Nombre';
       const photoName = document.getElementById('snappedPhotoName');
       if (photoName) photoName.textContent = pureState.name;
     });
 
-    // contenteditable divs — leer textContent
     titleInput?.addEventListener('input', () => {
       pureState.title = titleInput.textContent.trim() || 'Título Profesional';
     });
@@ -62,23 +56,24 @@
       pureState.phrase = phraseInput.textContent.trim() || 'Frase descriptiva de tu servicio';
     });
 
-    // Evitar que Enter cree <div> extras en contenteditable
     [titleInput, phraseInput].filter(Boolean).forEach(el => {
       el.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          // Insertar salto de línea <br> en su lugar si el usuario quiere
           document.execCommand('insertLineBreak');
         }
       });
     });
 
     // ──────────────────────────────────────────────
-    // 2. DRAG & DROP — Tokens flotantes (Desktop)
+    // 2. INTERACCIÓN DE TOKENS (TOUCH + DESKTOP DRAG + CLICK)
     // ──────────────────────────────────────────────
-    [tokenWa, tokenPhoto, tokenMaps].filter(Boolean).forEach(token => {
+    const tokens = [tokenWa, tokenPhoto, tokenMaps].filter(Boolean);
+
+    tokens.forEach(token => {
       token.setAttribute('draggable', 'true');
 
+      // ── Desktop Drag & Drop
       token.addEventListener('dragstart', (e) => {
         token.classList.add('is-dragging');
         e.dataTransfer.setData('text/plain', token.dataset.token);
@@ -89,14 +84,94 @@
         token.classList.remove('is-dragging');
       });
 
-      // Click directo → snap inmediato
-      token.addEventListener('click', () => {
+      // ── Click / Tap directo
+      token.addEventListener('click', (e) => {
         snapToken(token.dataset.token);
       });
+
+      // ── Touch Drag & Drop (Mobile & Tablets)
+      initMobileTouchDrag(token);
     });
 
+    function initMobileTouchDrag(token) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let hasMoved = false;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      token.addEventListener('touchstart', (e) => {
+        if (token.classList.contains('snapped-hidden')) return;
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        hasMoved = false;
+
+        const rect = token.getBoundingClientRect();
+        offsetX = touch.clientX - rect.left;
+        offsetY = touch.clientY - rect.top;
+      }, { passive: true });
+
+      token.addEventListener('touchmove', (e) => {
+        if (token.classList.contains('snapped-hidden')) return;
+        const touch = e.touches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+
+        if (!hasMoved && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+          hasMoved = true;
+          token.classList.add('is-dragging');
+        }
+
+        if (hasMoved) {
+          e.preventDefault(); // Evita scroll de página al arrastrar
+
+          token.style.position = 'fixed';
+          token.style.zIndex = '9999';
+          token.style.left = `${touch.clientX - offsetX}px`;
+          token.style.top = `${touch.clientY - offsetY}px`;
+          token.style.transform = 'scale(1.06) rotate(0deg)';
+          token.style.pointerEvents = 'none'; // Permite detectar dropzone debajo
+
+          const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+          const dropzone = elemBelow?.closest('[data-accepts]');
+
+          document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
+          if (dropzone && dropzone.dataset.accepts === token.dataset.token) {
+            dropzone.classList.add('drag-over');
+          }
+        }
+      }, { passive: false });
+
+      token.addEventListener('touchend', (e) => {
+        if (token.classList.contains('snapped-hidden')) return;
+
+        if (hasMoved) {
+          token.style.pointerEvents = '';
+          const touch = e.changedTouches[0];
+          const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+          const dropzone = elemBelow?.closest('[data-accepts]');
+
+          document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
+
+          token.classList.remove('is-dragging');
+          token.style.position = '';
+          token.style.zIndex = '';
+          token.style.left = '';
+          token.style.top = '';
+          token.style.transform = '';
+
+          // Encastrar la pieza
+          snapToken(token.dataset.token);
+        } else {
+          // Tap simple
+          snapToken(token.dataset.token);
+        }
+      });
+    }
+
     // ──────────────────────────────────────────────
-    // 3. DROPZONES
+    // 3. DROPZONES CONFIGURATION
     // ──────────────────────────────────────────────
     setupDropzone(dropGreen, 'wa',    snapWhatsApp);
     setupDropzone(dropRed,   'photo', snapPhoto);
@@ -124,32 +199,13 @@
         if (tokenType === targetType) onSnap();
       });
 
-      // Click en la dropzone también hace snap
       zone.addEventListener('click', () => {
         if (!zone.classList.contains('is-snapped')) onSnap();
       });
     }
 
     // ──────────────────────────────────────────────
-    // 4. BANDEJA MOBILE — Tap to snap
-    // ──────────────────────────────────────────────
-    mobileTokenWa?.addEventListener('click', () => {
-      snapWhatsApp();
-      mobileTokenWa.classList.add('snapped-hidden');
-    });
-
-    mobileTokenPhoto?.addEventListener('click', () => {
-      snapPhoto();
-      mobileTokenPhoto.classList.add('snapped-hidden');
-    });
-
-    mobileTokenMaps?.addEventListener('click', () => {
-      snapMaps();
-      mobileTokenMaps.classList.add('snapped-hidden');
-    });
-
-    // ──────────────────────────────────────────────
-    // 5. SNAP FUNCTIONS
+    // 4. SNAP FUNCTIONS
     // ──────────────────────────────────────────────
     function snapToken(type) {
       if (type === 'wa')    snapWhatsApp();
@@ -177,8 +233,7 @@
       updatePrice();
     }
 
-    // SNAP 2 — Foto profesional real en el cuadrado rojo
-    // Foto: retrato profesional mujer, fondo neutro, alta calidad
+    // SNAP 2 — Foto profesional real
     function snapPhoto() {
       if (pureState.hasPhoto) return;
       pureState.hasPhoto = true;
@@ -236,7 +291,7 @@
     }
 
     // ──────────────────────────────────────────────
-    // 6. PRECIO ANIMADO
+    // 5. PRECIO ANIMADO
     // ──────────────────────────────────────────────
     function updatePrice() {
       let total = pureState.basePrice;
@@ -252,7 +307,7 @@
     }
 
     // ──────────────────────────────────────────────
-    // 7. LANZAMIENTO POR WHATSAPP
+    // 6. LANZAMIENTO POR WHATSAPP
     // ──────────────────────────────────────────────
     launchBtn?.addEventListener('click', (e) => {
       e.preventDefault();
@@ -281,7 +336,7 @@
     });
 
     // ──────────────────────────────────────────────
-    // 8. ESTILOS INLINE DEL BOTÓN WA ENCASTRADO
+    // 7. ESTILOS INLINE DEL BOTÓN WA ENCASTRADO
     // ──────────────────────────────────────────────
     function injectWaBtnStyles() {
       if (document.getElementById('snapped-wa-styles')) return;

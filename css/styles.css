@@ -1196,53 +1196,50 @@ body {
   .dropzone-square-red { height: 220px; }
   .dropzone-rect-blue  { height: 90px; }
 
-  /* Ocultar zona de tokens flotantes en mobile */
-  .token-scatter-zone { display: none; }
-
-  /* Bandeja mobile */
-  .mobile-token-tray {
-    display: block;
-    margin-top: 24px;
-    padding: 20px 0 0 0;
-    border-top: 1px dashed rgba(0,0,0,0.14);
-  }
-
-  .mobile-tray-label {
-    font-size: 0.76rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: 14px;
-  }
-
-  .mobile-tray-tokens {
+  /* Zona de tokens en mobile: piezas interactivas sobre el lienzo */
+  .token-scatter-zone {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .mobile-token {
-    display: inline-flex;
+    flex-direction: column;
     align-items: center;
-    gap: 7px;
-    padding: 11px 18px;
-    border-radius: var(--radius-pill);
-    font-size: 0.9rem;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.22s var(--ease-spring);
-    color: #FFFFFF;
-    user-select: none;
-    border: none;
+    gap: 14px;
+    margin-top: 24px;
+    height: auto;
+    position: static;
   }
 
-  .mobile-token-wa    { background: var(--emerald-wa);  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.4); }
-  .mobile-token-photo { background: var(--red-photo);   box-shadow: 0 6px 18px rgba(220, 38, 38, 0.35); }
-  .mobile-token-maps  { background: var(--blue-maps);   box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35); }
+  .floating-token-wa,
+  .floating-token-photo,
+  .floating-token-maps {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
 
-  .mobile-token:active { transform: scale(0.96); }
-  .mobile-token.snapped-hidden { display: none !important; }
+  .floating-token-wa {
+    height: 52px !important;
+  }
+
+  .floating-token-photo {
+    height: 90px !important;
+  }
+
+  .floating-token-maps {
+    height: 54px !important;
+  }
+
+  .floating-token-wa:active,
+  .floating-token-photo:active,
+  .floating-token-maps:active {
+    transform: scale(0.97) !important;
+  }
 
   /* Barra CTA */
   .canvas-bottom-cta-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
