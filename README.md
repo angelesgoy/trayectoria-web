@@ -1,100 +1,49 @@
-# vinext-starter
+# Trayectoria — Sitio Web Oficial de Alta Conversión
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Sitio web comercial ultra-moderno, rápido y enfocado en la conversión directa a WhatsApp para vender desarrollo web a profesionales independientes (psicólogos, médicos, abogados, arquitectos, consultores, etc.).
 
-## Prerequisites
+---
 
-- Node.js `>=22.13.0`
+## 🚀 Cómo cambiar tu número de WhatsApp
 
-## Quick Start
+Para que todos los botones de la página y el configurador interactivo abran **tu propio número de WhatsApp**:
 
-```bash
-npm install
-npm run dev
-npm run build
+1. Abrí el archivo `js/funnel.js` y modificá la línea 9:
+   ```javascript
+   let TRAYECTORIA_PHONE = '5491123456789'; // Reemplazá por tu código de país y número (ej: 54911XXXXXXXX)
+   ```
+2. Abrí el archivo `js/app.js` y en la línea 312 modificá el número en caso de que uses el botón general.
+
+---
+
+## 📂 Estructura del Proyecto
+
+```
+d:/Antigravity/Trayectoria/
+├── index.html        # Página principal con estructura semántica y secciones de venta
+├── css/
+│   └── styles.css    # Sistema de diseño con bloques plenos, animaciones y responsive
+├── js/
+│   ├── app.js        # Lógica de navegación, animaciones reveal, acordeón FAQ y modales de showroom
+│   └── funnel.js     # Motor del cotizador interactivo 2026 y generador de mensajes a WhatsApp
+└── README.md         # Guía rápida de uso y configuración
 ```
 
-This starter does not use `wrangler.jsonc`.
+---
 
-## Included Shape
+## 💎 Características Principales
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
-
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
-```
-
-## Optional Dispatch-Owned ChatGPT Sign-In
-
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
-
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
-
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
-
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+1. **Copywriting Persuasivo y Directo**:
+   - Sin clichés corporativos ni frases vacías.
+   - Ataca el dolor de perder pacientes o clientes frente a la competencia por no tener web propia.
+2. **Showroom de Proyectos con Ventanas Interactivas**:
+   - Muestra ejemplos realistas para Psicología, Derecho, Medicina y Arquitectura.
+   - Incluye botón **"Probar Demo en Vivo"** que abre una ventana simulada interactiva con el flujo real de WhatsApp y Google Maps.
+3. **Embudo de Conversión 2026**:
+   - El cliente selecciona su especialidad y módulos requeridos en 3 pasos.
+   - Calcula el presupuesto estimado en tiempo real y redacta automáticamente el mensaje de WhatsApp al hacer clic.
+4. **Diseño Visual de Bloques Plenos**:
+   - Alto contraste: azul cobalto, negro obsidiana, gris estudio y blanco puro (sin naranja).
+   - Tipografía sans-serif moderna (*Plus Jakarta Sans* + *Inter*).
+5. **Cero Dependencias Pesadas**:
+   - Carga en menos de 1 segundo en cualquier dispositivo móvil o computadora.
